@@ -10,6 +10,7 @@
     </head>
 
     <body>
+
         <header>
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
@@ -31,7 +32,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="nosotros.html">Nosotros</a>
+                                <a class="nav-link active" href="nosotros.html">Nosotros</a>
                             </li>
 
                             <li class="nav-item">
@@ -49,37 +50,67 @@
         </header>
 
         <main>
-            <section class="py-5">
-                <div class="container" style="max-width: 450px;">
-                    <div class="card shadow-sm p-4">
-                        <h1 class="text-center mb-1">Iniciar Sesión</h1>
-                        <p class="text-center text-muted mb-4">Ingresa a tu cuenta de paciente</p>
+    <section class="py-5">
+        <div class="container" style="max-width: 600px;">
+            <div class="card shadow-sm p-4">
+                <h1 class="text-center mb-1">Agenda tu Hora</h1>
+                <p class="text-center text-muted mb-4">Completa tus datos y te contactaremos para confirmar</p>
 
-                        <form id="formLogin" novalidate>
-                            <div class="mb-3">
-                                <label for="correo" class="form-label">Correo electrónico</label>
-                                <input type="email" class="form-control" id="correo" maxlength="100">
-                                <div class="invalid-feedback" id="errorCorreo"></div>
-                            </div>
+                <form id="formAgendar" novalidate>
 
-                            <div class="mb-3">
-                                <label for="clave" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="clave" maxlength="10">
-                                <div class="invalid-feedback" id="errorClave"></div>
-                            </div>
-
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-success">Ingresar</button>
-                            </div>
-                        </form>
-
-                        <p class="text-center mt-3 mb-0">
-                            ¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a>
-                        </p>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre completo</label>
+                        <input type="text" class="form-control" id="nombre" maxlength="100">
+                        <div class="invalid-feedback" id="errorNombre"></div>
                     </div>
-                </div>
-            </section>
-        </main>
+
+                    <div class="mb-3">
+                        <label for="rut" class="form-label">RUT (sin puntos ni guión)</label>
+                        <input type="text" class="form-control" id="rut" placeholder="Ej: 19011022K" maxlength="9">
+                        <div class="invalid-feedback" id="errorRut"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="correo" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control" id="correo" maxlength="100">
+                        <div class="invalid-feedback" id="errorCorreo"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text" id="prefijo-pais">+56</span>
+                            <input type="tel" class="form-control" id="telefono" placeholder="9 1234 5678" maxlength="9" aria-describedby="prefijo-pais">
+                            <div class="invalid-feedback" id="errorTelefono"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="servicio" class="form-label">Especialidad</label>
+                        <select class="form-select" id="servicio">
+                            <option value="">-- Selecciona un servicio --</option>
+                            <option value="primera-consulta">Primera Consulta</option>
+                            <option value="perdida-peso">Plan Pérdida de Peso</option>
+                            <option value="deportiva">Nutrición Deportiva</option>
+                            <option value="taller">Taller Alimentación Saludable</option>
+                        </select>
+                        <div class="invalid-feedback" id="errorServicio"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="fecha" class="form-label">Fecha Reserva</label>
+                        <input type="date" class="form-control" id="fecha">
+                        <div class="invalid-feedback" id="errorFecha"></div>
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-success">Solicitar Hora</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
 
         <footer class="text-white pt-5 pb-4" style="background-color: #1e3a2f;">
             <div class="container">
@@ -138,6 +169,6 @@
 
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script src="login.js"></script>
+        <script src="agendar.js"></script>
     </body>
-</html>
+</html>>

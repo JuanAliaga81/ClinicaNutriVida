@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cita Confirmada - NutriVida</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light">
+
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="home.html">
+                    <img src="Imagenes/Logo NutriVida.png" alt="Logo NutriVida" width="30" height="30" class="me-2">
+                    NutriVida
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="py-5">
+        <div class="container" style="max-width: 650px;">
+            <div class="card shadow-sm p-4 text-center">
+                <!-- Icono de éxito -->
+                <div class="text-success mb-3">
+                    <i class="fa-solid fa-circle-check fa-4x"></i>
+                </div>
+                <h2 class="fw-bold mb-2">¡Solicitud Enviada con Éxito!</h2>
+                <p class="text-muted mb-4">Hemos recibido tu solicitud. Pronto te contactaremos para confirmar el horario final.</p>
+
+                <!-- Resumen de datos -->
+                <div class="text-start border rounded p-3 mb-4 bg-body-tertiary">
+                    <h5 class="border-bottom pb-2 mb-3 text-secondary">Resumen de tu Cita</h5>
+                    <div class="row g-2">
+                        <div class="col-sm-4 fw-bold">Nombre:</div>
+                        <div class="col-sm-8" id="resNombre">-</div>
+
+                        <div class="col-sm-4 fw-bold">RUT:</div>
+                        <div class="col-sm-8" id="resRut">-</div>
+
+                        <div class="col-sm-4 fw-bold">Correo:</div>
+                        <div class="col-sm-8" id="resCorreo">-</div>
+
+                        <div class="col-sm-4 fw-bold">Teléfono:</div>
+                        <div class="col-sm-8" id="resTelefono">-</div>
+
+                        <div class="col-sm-4 fw-bold">Especialidad:</div>
+                        <div class="col-sm-8" id="resServicio">-</div>
+
+                        <div class="col-sm-4 fw-bold">Fecha Reserva:</div>
+                        <div class="col-sm-8" id="resFecha">-</div>
+                    </div>
+                </div>
+
+                <h3 class="fs-5 text-muted">
+                    Se ha enviado una copia del registro a su correo: <span id="correoOfuscado" class="fw-bold text-dark"></span>
+                </h3>
+                <br>
+
+                <div class="d-grid gap-2 col-md-6 mx-auto">
+                    <a href="home.html" class="btn btn-success">Volver al Inicio</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Función para enmascarar el correo (ej: jua***@gmail.com)
+        function enmascararCorreo(correo) {
+            const [usuario, dominio] = correo.split("@");
+            if (!usuario || !dominio) return correo;
+
+            const inicio = usuario.slice(0, 3);
+            return `${inicio}***@${dominio}`;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const dataStorage = sessionStorage.getItem("reservaNutriVida");
+
+            // Si acceden directamente por URL sin rellenar el formulario, volver al home
+            if (!dataStorage) {
+                window.location.href = "home.html";
+                return;
+            }
+
+            const reserva = JSON.parse(dataStorage);
+
+            // Inyectar datos en la tarjeta de resumen
+            document.getElementById("resNombre").textContent = reserva.nombre;
+            document.getElementById("resRut").textContent = reserva.rut;
+            document.getElementById("resCorreo").textContent = reserva.correo;
+            document.getElementById("resTelefono").textContent = reserva.telefono;
+            document.getElementById("resServicio").textContent = reserva.servicio;
+            document.getElementById("resFecha").textContent = reserva.fecha;
+
+            // Inyectar el correo ofuscado en el mensaje inferior
+            const elementoCorreo = document.getElementById("correoOfuscado");
+            if (elementoCorreo && reserva.correo) {
+                elementoCorreo.textContent = enmascararCorreo(reserva.correo);
+            }
+        });
+    </script>
+</body>
+</html>
