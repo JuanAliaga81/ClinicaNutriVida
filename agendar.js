@@ -4,20 +4,20 @@ form.addEventListener("submit", function (evento) {
     evento.preventDefault();
     let esValido = true;
 
-    // Nombre
+    // 1. Validación Nombre
     const nombre = document.getElementById("nombre");
     const errorNombre = document.getElementById("errorNombre");
     if (nombre.value.trim() === "") {
         mostrarError(nombre, errorNombre, "El nombre es obligatorio.");
         esValido = false;
-    } else if (nombre.value.length > 100) {
+    } else if (nombre.value.trim().length > 100) {
         mostrarError(nombre, errorNombre, "El nombre no puede superar los 100 caracteres.");
         esValido = false;
     } else {
-        limpiarError(nombre);
+        limpiarError(nombre, errorNombre);
     }
 
-    // RUT
+    // 2. Validación RUT (Formato y Algoritmo Módulo 11)
     const rut = document.getElementById("rut");
     const errorRut = document.getElementById("errorRut");
     const rutLimpio = rut.value.trim().toUpperCase();
@@ -32,15 +32,13 @@ form.addEventListener("submit", function (evento) {
         mostrarError(rut, errorRut, "El RUT ingresado no es válido.");
         esValido = false;
     } else {
-        limpiarError(rut);
+        limpiarError(rut, errorRut);
     }
 
-    // Correo
+    // 3. Validación Correo (Acepta Gmail, Outlook, Duoc y cualquier dominio estándar)
     const correo = document.getElementById("correo");
     const errorCorreo = document.getElementById("errorCorreo");
     const correoValor = correo.value.trim();
-
-    // Valida cualquier estructura estándar de correo: usuario@dominio.extension
     const patronCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     if (correoValor === "") {
@@ -53,14 +51,10 @@ form.addEventListener("submit", function (evento) {
         limpiarError(correo, errorCorreo);
     }
 
-    // Teléfono
+    // 4. Validación Teléfono (9 dígitos comenzando con 9)
     const telefono = document.getElementById("telefono");
     const errorTelefono = document.getElementById("errorTelefono");
-
-    // Limpia espacios en blanco, guiones o puntos que el usuario pueda escribir
     const telefonoLimpio = telefono.value.replace(/[\s\-\.]/g, "");
-
-    // Valida exactamente 9 dígitos comenzando por 9 (ej: 912345678)
     const telefonoValido = /^9\d{8}$/.test(telefonoLimpio);
 
     if (telefono.value.trim() === "") {
@@ -73,17 +67,17 @@ form.addEventListener("submit", function (evento) {
         limpiarError(telefono, errorTelefono);
     }
 
-    // Servicio
+    // 5. Validación Servicio
     const servicio = document.getElementById("servicio");
     const errorServicio = document.getElementById("errorServicio");
     if (servicio.value === "") {
         mostrarError(servicio, errorServicio, "Selecciona un servicio.");
         esValido = false;
     } else {
-        limpiarError(servicio);
+        limpiarError(servicio, errorServicio);
     }
 
-    // Fecha
+    // 6. Validación Fecha
     const fecha = document.getElementById("fecha");
     const errorFecha = document.getElementById("errorFecha");
     const hoy = new Date().toISOString().split("T")[0];
@@ -95,29 +89,36 @@ form.addEventListener("submit", function (evento) {
         mostrarError(fecha, errorFecha, "La fecha no puede ser anterior a hoy.");
         esValido = false;
     } else {
-        limpiarError(fecha);
+        limpiarError(fecha, errorFecha);
     }
 
+    // Procesamiento y guardado si todo es correcto
     if (esValido) {
-        // Objeto con los datos capturados y formateados
-        const datosCita = {
+        const nuevaCita = {
+            id: Date.now(),
             nombre: nombre.value.trim(),
             rut: rutLimpio,
-            correo: correo.value.trim(),
+            correo: correoValor,
             telefono: "+56 " + telefonoLimpio,
             servicio: servicio.options[servicio.selectedIndex].text,
-            fecha: fecha.value
+            fecha: fecha.value,
+            fechaRegistro: new Date().toLocaleDateString("es-CL")
         };
 
-        // Guardar en la sesión del navegador
-        sessionStorage.setItem("reservaNutriVida", JSON.stringify(datosCita));
+        // Guardar acumulativamente en localStorage para la página citas.html
+        const citasGuardadas = JSON.parse(localStorage.getItem("citasNutriVida")) || [];
+        citasGuardadas.push(nuevaCita);
+        localStorage.setItem("citasNutriVida", JSON.stringify(citasGuardadas));
 
-        // Redirigir a la vista de confirmación
+        // Guardar la cita actual en sessionStorage para confirmacion.html
+        sessionStorage.setItem("reservaNutriVida", JSON.stringify(nuevaCita));
+
+        // Redirección
         window.location.href = "confirmacion.html";
     }
 });
 
-// Validación de RUT chileno (dígito verificador)
+// Validación de RUT chileno (algoritmo Módulo 11)
 function validarRut(rut) {
     const cuerpo = rut.slice(0, -1);
     const dv = rut.slice(-1).toUpperCase();
@@ -126,7 +127,7 @@ function validarRut(rut) {
     let multiplo = 2;
 
     for (let i = cuerpo.length - 1; i >= 0; i--) {
-        suma += parseInt(cuerpo[i]) * multiplo;
+        suma += parseInt(cuerpo[i], 10) * multiplo;
         multiplo = multiplo === 7 ? 2 : multiplo + 1;
     }
 
@@ -141,14 +142,19 @@ function validarRut(rut) {
     return dv === dvCalculado;
 }
 
+// Control visual de clases de error y mensajes Bootstrap
 function mostrarError(campo, elementoError, mensaje) {
     campo.classList.add("is-invalid");
     campo.classList.remove("is-valid");
-    if (elementoError) elementoError.textContent = mensaje;
+    if (elementoError) {
+        elementoError.textContent = mensaje;
+    }
 }
 
 function limpiarError(campo, elementoError) {
     campo.classList.remove("is-invalid");
     campo.classList.add("is-valid");
-    if (elementoError) elementoError.textContent = "";
+    if (elementoError) {
+        elementoError.textContent = "";
+    }
 }

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citas Agendadas - Clínica NutriVida</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light">
+
+    <!-- Navegación -->
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="home.html">
+                    <img src="Imagenes/Logo NutriVida.png" alt="Logo NutriVida" width="30" height="30" class="me-2">
+                    NutriVida
+                </a>
+                <div class="ms-auto d-flex gap-2">
+                    <a href="agendar.html" class="btn btn-outline-success btn-sm">
+                        <i class="fa-solid fa-plus me-1"></i> Agendar Otra Cita
+                    </a>
+                    <a href="home.html" class="btn btn-secondary btn-sm">Inicio</a>
+                </div>
+            </div>
+            <div class="d-flex ms-lg-3">
+                <a id="btnAuth" class="btn btn-outline-success" href="login.html">Iniciar Sesión</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="h3 fw-bold mb-0">Listado de Horas Solicitadas</h1>
+                <p class="text-muted small mb-0">Gestión de pacientes agendados</p>
+            </div>
+            <button id="btnLimpiarTodo" class="btn btn-outline-danger btn-sm">
+                <i class="fa-solid fa-trash me-1"></i> Borrar Todo el Historial
+            </button>
+        </div>
+
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Paciente</th>
+                                <th>RUT</th>
+                                <th>Contacto</th>
+                                <th>Servicio</th>
+                                <th>Fecha Cita</th>
+                                <th class="text-center">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaCitas">
+                            <!-- Inyección dinámica desde JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mensaje cuando no hay registros -->
+        <div id="sinCitas" class="text-center py-5 d-none">
+            <i class="fa-regular fa-calendar-xmark fa-3x text-muted mb-3"></i>
+            <h5 class="text-muted">No existen citas registradas hasta el momento.</h5>
+            <a href="agendar.html" class="btn btn-success btn-sm mt-2">Agendar la primera cita</a>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const tabla = document.getElementById("tablaCitas");
+            const mensajeVacio = document.getElementById("sinCitas");
+            const btnLimpiar = document.getElementById("btnLimpiarTodo");
+
+            function renderizarTabla() {
+                const citas = JSON.parse(localStorage.getItem("citasNutriVida")) || [];
+                tabla.innerHTML = "";
+
+                if (citas.length === 0) {
+                    tabla.closest(".card").classList.add("d-none");
+                    mensajeVacio.classList.remove("d-none");
+                    btnLimpiar.classList.add("d-none");
+                    return;
+                }
+
+                tabla.closest(".card").classList.remove("d-none");
+                mensajeVacio.classList.add("d-none");
+                btnLimpiar.classList.remove("d-none");
+
+                citas.forEach(cita => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>
+                            <div class="fw-bold">${cita.nombre}</div>
+                            <small class="text-muted">Reg: ${cita.fechaRegistro}</small>
+                        </td>
+                        <td><code>${cita.rut}</code></td>
+                        <td>
+                            <div><i class="fa-solid fa-envelope me-1 text-secondary"></i>${cita.correo}</div>
+                            <div><i class="fa-solid fa-phone me-1 text-secondary"></i>${cita.telefono}</div>
+                        </td>
+                        <td><span class="badge bg-success-subtle text-success border border-success-subtle">${cita.servicio}</span></td>
+                        <td><strong>${cita.fecha}</strong></td>
+                        <td class="text-center">
+                            <button class="btn btn-outline-danger btn-sm" onclick="eliminarCita(${cita.id})" title="Cancelar cita">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </td>
+                    `;
+                    tabla.appendChild(tr);
+                });
+            }
+
+            // Eliminar registro individual por su ID único
+            window.eliminarCita = function(id) {
+                let citas = JSON.parse(localStorage.getItem("citasNutriVida")) || [];
+                citas = citas.filter(c => c.id !== id);
+                localStorage.setItem("citasNutriVida", JSON.stringify(citas));
+                renderizarTabla();
+            };
+
+            // Vaciar todo el historial
+            btnLimpiar.addEventListener("click", () => {
+                if (confirm("¿Estás seguro de que deseas eliminar todas las citas agendadas?")) {
+                    localStorage.removeItem("citasNutriVida");
+                    renderizarTabla();
+                }
+            });
+
+            renderizarTabla();
+        });
+    </script>
+    <script src="auth.js"></script>
+</body>
+</html>
