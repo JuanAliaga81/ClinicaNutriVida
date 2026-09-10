@@ -10,7 +10,6 @@
     </head>
 
     <body>
-
         <header>
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
@@ -32,7 +31,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link active" href="nosotros.html">Nosotros</a>
+                                <a class="nav-link" href="nosotros.html">Nosotros</a>
                             </li>
 
                             <li class="nav-item">
@@ -50,47 +49,41 @@
         </header>
 
         <main>
-    <section class="py-5">
-        <div class="container">
-            <h1 class="text-center mb-2">Noticias Importantes</h1>
-            <p class="text-center text-muted mb-5">Datos curiosos y consejos de nutrición</p>
+            <section class="py-5">
+                <div class="container" style="max-width: 450px;">
+                    <div class="card shadow-sm p-4">
+                        <h1 class="text-center mb-1">Iniciar Sesión</h1>
+                        <p class="text-center text-muted mb-4">Ingresa a tu cuenta de paciente</p>
 
-            <div class="row g-4">
+                        <form id="formLogin" novalidate>
+                            <div class="mb-3">
+                                <label for="correo" class="form-label">Correo electrónico</label>
+                                <input type="email" class="form-control" id="correo" maxlength="100">
+                                <div class="invalid-feedback" id="errorCorreo"></div>
+                            </div>
 
-                <!-- Blog 1 -->
-                <div class="col-md-6">
-                    <div class="card h-100 shadow-sm">
-                        <img src="Imagenes/Desayuno.jfif" class="card-img-top" alt="Beneficios del desayuno">
-                        <div class="card-body">
-                            <h3 class="card-title">Los beneficios de un buen desayuno</h3>
-                            <p class="card-text">
-                                Un desayuno balanceado activa tu metabolismo y mejora tu concentración
-                                durante el resto del día. Te contamos qué alimentos no pueden faltar...
-                            </p>
-                            <a href="detalle-blog1.html" class="btn btn-outline-success">Ver caso</a>
+                            <div class="mb-3">
+                                <label for="clave" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="clave" maxlength="10">
+                                <div class="invalid-feedback" id="errorClave"></div>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-success">Ingresar</button>
+                            </div>
+                        </form>
+
+                        <p class="text-center mt-3 mb-0">
+                            ¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a>
+                        </p>
+
+                        <div class="alert alert-success mt-3 d-none" id="exito">
+                            ¡Inicio de sesión exitoso!
                         </div>
                     </div>
                 </div>
-
-                <!-- Blog 2 -->
-                <div class="col-md-6">
-                    <div class="card h-100 shadow-sm">
-                        <img src="Imagenes/Mitos.jfif" class="card-img-top" alt="Mitos de las dietas">
-                        <div class="card-body">
-                            <h3 class="card-title">5 mitos comunes sobre las dietas</h3>
-                            <p class="card-text">
-                                ¿Comer de noche engorda? ¿Hay que eliminar los carbohidratos por completo?
-                                Aclaramos los mitos más comunes que escuchamos en consulta...
-                            </p>
-                            <a href="detalle-blog2.html" class="btn btn-outline-success">Ver caso</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-</main>
+            </section>
+        </main>
 
         <footer class="text-white pt-5 pb-4" style="background-color: #1e3a2f;">
             <div class="container">
