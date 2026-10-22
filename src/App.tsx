@@ -1,4 +1,5 @@
 import './App.css'
+import { Route, Routes } from 'react-router-dom';
 import Footer from './componentes/organismos/Footer'
 
 import Navbar from './componentes/organismos/Navbar'
@@ -9,8 +10,12 @@ function App() {
   return (
     <>
       <Navbar/>
-        <h1>sahfjeri</h1>
-        <Inicio/>
+        <Routes>
+        <Route
+          path="/"
+          element={<Inicio/>}
+        />
+        </Routes>
       
       <Footer/>
     </>
