@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Navbar(){
     return(
         <>
@@ -20,10 +22,21 @@ function Navbar(){
 
                         <div className="drawer-body">
                             <div className="nav nav-pills navbar-nav">
-                            <a className="nav-link active" aria-current="page" href="#">Home</a>
-                            <a className="nav-link" href="#">Features</a>
-                            <a className="nav-link" href="#">Pricing</a>
-                            <a className="nav-link disabled" aria-disabled="true">Disabled</a>
+                                <div className="nav nav-pills navbar-nav">
+                                    <div className="nav-links-centro">
+                                        <Link className="nav-link" to="/inicio">Inicio</Link>
+                                        <Link className="nav-link" to="/servicios">Servicios</Link>
+                                        <Link className="nav-link" to="/nosotros">Nosotros</Link>
+                                        <Link className="nav-link" to="/blogs">Blogs</Link>
+                                        <Link className="nav-link" to="/contacto">Contacto</Link>
+                                    </div>
+
+                                    <div className="nav-acciones">
+                                        <Link className="nav-link login" to="/login">
+                                        Iniciar Sesión
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </dialog>

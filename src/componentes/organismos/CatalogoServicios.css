@@ -1,0 +1,15 @@
+.catalogo-servicios .card-servicio-col {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .catalogo-servicios .card-servicio-col {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .catalogo-servicios .card-servicio-col {
+    width: 33.333333%;
+  }
+}

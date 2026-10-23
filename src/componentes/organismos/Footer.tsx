@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="text-white pt-5 pb-4" style={{ backgroundColor: "#1e3a2f" }}>
+    <footer className="text-white pt-5 pb-4" style={{ backgroundColor: "#2d8d66" , color: "white"}}>
     <div className="container">
         <div className="row">
 
