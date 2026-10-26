@@ -1,0 +1,21 @@
+.navbar-nutrivida { background: #fff; color: #273c32; box-shadow: 0 2px 12px #173d2d12; }
+.navbar-nutrivida .navbar-brand { gap: .45rem; color: #173d2d; text-decoration: none; font-weight: 650; }
+.navbar-nutrivida .navbar-brand img { object-fit: contain; }
+.navbar-nutrivida .navbar-menu { display: none; flex-basis: 100%; padding-top: .75rem; }
+.navbar-nutrivida .navbar-menu.is-open { display: block; }
+.navbar-nutrivida .nav-links-centro, .navbar-nutrivida .nav-acciones { display: flex; flex-direction: column; gap: .25rem; }
+.navbar-nutrivida .nav-link { color: #34483d; text-decoration: none; }
+.navbar-nutrivida .nav-link:hover, .navbar-nutrivida .nav-link:focus-visible { color: #16834e; }
+.navbar-nutrivida .nav-link.reserva { display: inline-block; width: fit-content; border-radius: 999px; padding: .45rem .9rem; background: #2d8d66; color: #fff; }
+.navbar-nutrivida .nav-link.reserva:hover, .navbar-nutrivida .nav-link.reserva:focus-visible { background: #62b996; color: #fff; }
+.navbar-nutrivida .nav-link.login { width: fit-content; padding: .4rem .8rem; border: 1px solid #16834e; border-radius: 6px; color: #16834e; text-align: center; }
+.navbar-nutrivida .nav-link.login:hover, .navbar-nutrivida .nav-link.login:focus-visible { background: #16834e; color: #fff; }
+.navbar-nutrivida .nav-link.nav-admin { color: #28764f; font-weight: 650; }
+.navbar-nutrivida .nav-link.nav-admin:hover, .navbar-nutrivida .nav-link.nav-admin:focus-visible { color: #1e684b; text-decoration: underline; }
+@media (min-width: 768px) {
+  .navbar-nutrivida .container-fluid { flex-wrap: nowrap; }
+  .navbar-nutrivida .navbar-toggler { display: none; }
+  .navbar-nutrivida .navbar-menu, .navbar-nutrivida .navbar-menu.is-open { display: flex; flex: 1; flex-basis: auto; align-items: center; padding-top: 0; }
+  .navbar-nutrivida .nav-links-centro { flex-direction: row; align-items: center; gap: .75rem; margin: 0 auto; }
+  .navbar-nutrivida .nav-acciones { flex-direction: row; align-items: center; gap: .6rem; margin-left: auto; }
+}

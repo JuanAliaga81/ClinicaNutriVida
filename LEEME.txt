@@ -1,0 +1,35 @@
+ACTUALIZACION REACT - CLINICA NUTRIVIDA
+
+Contenido del paquete
+- Páginas nuevas: Blogs, Contacto, Login, Registro, Perfil, Agendar, Citas y Confirmación.
+- App.tsx actualizado con las rutas nuevas.
+- Navbar actualizado para mostrar los enlaces de la versión anterior y el acceso de sesión.
+- Imágenes de los dos artículos del blog.
+
+Cómo aplicarlo
+1. Haz una copia de seguridad de tu proyecto.
+2. Extrae este ZIP dentro de la carpeta raíz del proyecto React (la carpeta donde está package.json).
+3. Acepta reemplazar index.html, src/App.tsx y src/componentes/organismos/Navbar.tsx.
+4. Conserva los demás archivos existentes: el contenido nuevo solo agrega páginas, datos y hojas CSS.
+5. Ejecuta npm run dev y abre /inicio.
+
+Rutas principales
+/inicio, /servicios, /nosotros, /blogs, /contacto, /login, /registro,
+/perfil, /agendar, /citas, /confirmacion y /reserva.
+
+Panel de administración
+- Ruta: /admin (requiere iniciar sesión con rol Administrador).
+- Cuenta de demostración: admin@nutrivida.cl
+- Contraseña de demostración: NutriVida1
+- La cuenta de demostración está protegida: no se puede editar, desactivar ni eliminar desde el panel.
+- Permite crear, buscar, filtrar, editar, activar/desactivar y eliminar usuarios; los roles disponibles son Administrador, Nutricionista y Paciente.
+- Revisa y responde las conversaciones de Contacto desde Administración; el usuario las ve y puede responder en Perfil con el mismo correo.
+- Añade, edita o elimina servicios con imágenes. Las imágenes se optimizan y la página Servicios refleja los cambios.
+
+/agendar conserva el formulario antiguo, validaciones y confirmación. /reserva mantiene el gestor CRUD que ya estaba en el proyecto React.
+Las solicitudes se guardan en localStorage con la clave citasNutriVida, los usuarios en usuariosNutriVida, los mensajes en mensajesContactoNutriVida y los servicios editables en serviciosNutriVida.
+
+Alcance
+Es una demostración front-end: usuarios, citas, mensajes, respuestas e imágenes de servicios viven solo en el navegador.
+La cuenta de administración también es solo para demostrar el flujo en frontend; no uses estas credenciales ni el almacenamiento local para producción.
+Las pruebas automatizadas quedan para la etapa final acordada.

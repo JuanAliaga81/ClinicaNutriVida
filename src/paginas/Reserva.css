@@ -1,0 +1,354 @@
+#root:has(.pagina-reserva) {
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+#root:has(.pagina-reserva) > .navbar,
+#root:has(.pagina-reserva) > footer {
+  flex-shrink: 0;
+}
+
+/* Se oculta el footer solo en Reserva para que el contenido quepa en pantalla. */
+#root:has(.pagina-reserva) > footer {
+  display: none;
+}
+
+.pagina-reserva {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  width: min(1100px, calc(100% - 2rem));
+  max-width: none;
+  margin: 0 auto;
+  padding: 0.8rem 0;
+  overflow: hidden;
+  color: #183b2d;
+}
+
+.reserva-encabezado {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.reserva-etiqueta {
+  margin: 0 0 0.15rem;
+  color: #237b55;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pagina-reserva h1 {
+  margin: 0;
+  color: #183b2d;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  line-height: 1.1;
+}
+
+.reserva-encabezado > p {
+  max-width: 360px;
+  margin: 0;
+  color: #5b6f62;
+  font-size: 0.88rem;
+  text-align: right;
+}
+
+.gestor-reservas {
+  display: grid;
+  flex: 1;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 0.65rem;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.reserva-pestanas {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.4rem;
+  padding: 0.25rem;
+  border-radius: 0.8rem;
+  background: #edf5ef;
+}
+
+.reserva-pestanas button {
+  min-height: 38px;
+  padding: 0.45rem 1rem;
+  border: 0;
+  border-radius: 0.6rem;
+  background: transparent;
+  color: #456252;
+  font-size: 0.88rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.reserva-pestanas button.activa {
+  background: #fff;
+  color: #176c45;
+  box-shadow: 0 2px 8px rgba(24, 67, 47, 0.1);
+}
+
+.reserva-vista {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.reserva-panel,
+.reserva-listado {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 0.85rem 1rem;
+  overflow: auto;
+  border: 1px solid #dfebe3;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 5px 16px rgba(24, 67, 47, 0.06);
+}
+
+.reserva-formulario h2,
+.reserva-listado h2 {
+  margin: 0 0 0.6rem;
+  color: #183b2d;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.reserva-formulario .row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 0.75rem;
+  margin: 0;
+}
+
+.reserva-formulario .row > * {
+  width: auto;
+  max-width: none;
+  padding: 0;
+}
+
+.reserva-formulario .row > .col-12:not(.col-md-6):not(.col-md-3) {
+  grid-column: 1 / -1;
+}
+
+.reserva-formulario .mb-3 {
+  margin-bottom: 0.35rem !important;
+}
+
+.reserva-formulario .form-label {
+  margin-bottom: 0.15rem;
+  color: #294b39;
+  font-size: 0.78rem;
+  font-weight: 650;
+}
+
+.reserva-formulario .form-control,
+.reserva-formulario .form-select {
+  min-height: 36px;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid #d3e2d8;
+  border-radius: 0.55rem;
+  font-size: 0.85rem;
+}
+
+.reserva-formulario textarea.form-control {
+  min-height: 54px;
+  resize: none;
+}
+
+.reserva-formulario .text-danger {
+  margin: 0.1rem 0 0 !important;
+  font-size: 0.72rem !important;
+}
+
+.reserva-formulario .btn-success {
+  min-height: 36px;
+  padding: 0.4rem 0.8rem;
+  border: 0;
+  border-radius: 0.55rem;
+  background: #237b55;
+  font-size: 0.84rem;
+}
+
+.reserva-listado {
+  display: flex;
+  flex-direction: column;
+}
+
+.reserva-listado-encabezado {
+  display: flex;
+  flex-shrink: 0;
+  align-items: end;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.reserva-listado-encabezado p {
+  margin: 0;
+  color: #64756a;
+  font-size: 0.8rem;
+}
+
+.reserva-busqueda {
+  width: min(100%, 260px);
+}
+
+.reserva-busqueda label {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: #294b39;
+  font-size: 0.78rem;
+  font-weight: 650;
+}
+
+.reserva-busqueda input {
+  width: 100%;
+  min-height: 36px;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid #d3e2d8;
+  border-radius: 0.55rem;
+  font-size: 0.84rem;
+}
+
+.reserva-mensaje {
+  margin: 0.3rem 0;
+  color: #176c45;
+  font-size: 0.82rem;
+}
+
+.reserva-tabla-contenedor {
+  min-height: 0;
+  overflow: auto;
+}
+
+.reserva-listado table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+
+.reserva-listado th,
+.reserva-listado td {
+  padding: 0.45rem;
+  border-bottom: 1px solid #e5eee8;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.reserva-listado th {
+  position: sticky;
+  top: 0;
+  background: #f1f8f3;
+  color: #294b39;
+  white-space: nowrap;
+}
+
+.reserva-listado td small {
+  display: block;
+  color: #718077;
+  font-size: 0.7rem;
+}
+
+.reserva-estado {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: #e2f4e9;
+  color: #176c45;
+  white-space: nowrap;
+}
+
+.reserva-acciones {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.reserva-acciones button {
+  padding: 0.3rem 0.45rem;
+  border: 1px solid #237b55;
+  border-radius: 0.45rem;
+  background: #fff;
+  color: #237b55;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.reserva-acciones button.cancelar {
+  border-color: #b94b4b;
+  color: #a43d3d;
+}
+
+@media (max-width: 575px) {
+  .pagina-reserva {
+    width: calc(100% - 1rem);
+    padding: 0.5rem 0;
+  }
+
+  .reserva-encabezado {
+    align-items: start;
+    margin-bottom: 0.5rem;
+  }
+
+  .reserva-encabezado > p {
+    max-width: 175px;
+    font-size: 0.75rem;
+  }
+
+  .reserva-formulario .row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 0.45rem;
+  }
+
+  .reserva-formulario .row > .col-12.col-md-6,
+  .reserva-formulario .row > .col-12.col-md-3 {
+    grid-column: auto;
+  }
+
+  .reserva-formulario .form-label {
+    font-size: 0.7rem;
+  }
+
+  .reserva-formulario .form-control,
+  .reserva-formulario .form-select {
+    font-size: 0.78rem;
+  }
+
+  .reserva-listado-encabezado {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .reserva-busqueda {
+    width: 100%;
+  }
+
+  .reserva-tabla-contenedor {
+    overflow-x: auto;
+  }
+
+  .reserva-listado table {
+    min-width: 560px;
+  }
+}
+.login-submit,
+.registro-submit {
+  color: #fff !important;
+}
+
+.login-submit:hover,
+.login-submit:focus-visible,
+.registro-submit:hover,
+.registro-submit:focus-visible {
+  color: #fff !important;
+  background-color: #62b996 !important;
+  border-color: #62b996 !important;
+}

@@ -1,49 +1,58 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { obtenerUsuarioActual, type Usuario } from '../../datos/auth';
+import './Navbar-extra.css';
 
-function Navbar(){
-    return(
-        <>
-            <nav className="navbar sm:navbar-expand bg-1 fg-2">
-                <div className="container-fluid">
-                    <img src="/img/Logo NutriVida.png" width={40}/>
+function Navbar() {
+  const [menuAbierto, setMenuAbierto] = useState(false);
+  const [usuario, setUsuario] = useState<Usuario | null>(() => obtenerUsuarioActual());
 
-                    <a className="navbar-brand" href="#">Nutrivida</a>
+  useEffect(() => {
+    const actualizar = () => setUsuario(obtenerUsuarioActual());
+    window.addEventListener('nutrivida-auth', actualizar);
+    window.addEventListener('storage', actualizar);
+    return () => {
+      window.removeEventListener('nutrivida-auth', actualizar);
+      window.removeEventListener('storage', actualizar);
+    };
+  }, []);
 
-                    <button className="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon" aria-hidden="true"></span>
-                    </button>
+  const cerrarMenu = () => setMenuAbierto(false);
 
-                    <dialog className="drawer drawer-end" tabIndex={-1} id="navbarNavAltMarkup" aria-labelledby="navbarNavAltMarkupLabel">
-
-                        <div className="drawer-header">
-                            <h5 className="drawer-title" id="navbarNavAltMarkupLabel">Menu</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
-                        </div>
-
-                        <div className="drawer-body">
-                            <div className="nav nav-pills navbar-nav">
-                                <div className="nav nav-pills navbar-nav">
-                                    <div className="nav-links-centro">
-                                        <Link className="nav-link" to="/inicio">Inicio</Link>
-                                        <Link className="nav-link" to="/servicios">Servicios</Link>
-                                        <Link className="nav-link" to="/nosotros">Nosotros</Link>
-                                        <Link className="nav-link" to="/blogs">Blogs</Link>
-                                        <Link className="nav-link" to="/contacto">Contacto</Link>
-                                    </div>
-
-                                    <div className="nav-acciones">
-                                        <Link className="nav-link login" to="/login">
-                                        Iniciar Sesión
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </dialog>
-                </div>
-            </nav>
-        </>
-    )
+  return (
+    <nav className="navbar sm:navbar-expand bg-1 fg-2 navbar-nutrivida">
+      <div className="container-fluid">
+        <Link className="navbar-brand d-flex align-items-center" to="/inicio" onClick={cerrarMenu}>
+          <img src="/img/Logo NutriVida.png" width={40} height={40} alt="" />
+          <span>NutriVida</span>
+        </Link>
+        <button
+          className="btn-icon navbar-toggler"
+          type="button"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded={menuAbierto}
+          aria-label={menuAbierto ? 'Cerrar menú' : 'Abrir menú'}
+          onClick={() => setMenuAbierto(!menuAbierto)}
+        >
+          <span className="navbar-toggler-icon" aria-hidden="true" />
+        </button>
+        <div id="navbarNavAltMarkup" className={`navbar-menu ${menuAbierto ? 'is-open' : ''}`}>
+          <div className="nav-links-centro">
+            <Link className="nav-link" to="/inicio" onClick={cerrarMenu}>Inicio</Link>
+            <Link className="nav-link" to="/servicios" onClick={cerrarMenu}>Servicios</Link>
+            <Link className="nav-link" to="/nosotros" onClick={cerrarMenu}>Nosotros</Link>
+            <Link className="nav-link" to="/blogs" onClick={cerrarMenu}>Blogs</Link>
+            <Link className="nav-link" to="/contacto" onClick={cerrarMenu}>Contacto</Link>
+          </div>
+          <div className="nav-acciones">
+            <Link className="nav-link reserva" to="/agendar" onClick={cerrarMenu}>Reserva tu hora</Link>
+            {usuario?.rol === 'Administrador' && <Link className="nav-link nav-admin" to="/admin" onClick={cerrarMenu}>Administración</Link>}
+            {usuario ? <Link className="nav-link login" to="/perfil" onClick={cerrarMenu}>Mi perfil</Link> : <Link className="nav-link login" to="/login" onClick={cerrarMenu}>Iniciar sesión</Link>}
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
 }
 
 export default Navbar;

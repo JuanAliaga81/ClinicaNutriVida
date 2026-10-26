@@ -1,0 +1,80 @@
+.footer-nutrivida {
+  background-color: #2d8d66;
+  color: #fff;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr) minmax(140px, 1fr);
+  gap: 2rem;
+  align-items: start;
+  text-align: left;
+}
+
+.footer-column h5 {
+  margin: 0 0 0.75rem;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.footer-column p,
+.footer-list {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.6;
+}
+
+.footer-list {
+  padding: 0;
+  list-style: none;
+}
+
+.footer-list li + li {
+  margin-top: 0.35rem;
+}
+
+.footer-list i {
+  width: 1.3rem;
+  margin-right: 0.35rem;
+  text-align: center;
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-social a {
+  color: #fff;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.footer-social a:hover,
+.footer-social a:focus-visible {
+  color: #d8f3e4;
+}
+
+.footer-divider {
+  margin: 1.75rem 0 1rem;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.footer-copyright {
+  color: rgba(255, 255, 255, 0.78);
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+}

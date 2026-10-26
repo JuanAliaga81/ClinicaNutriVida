@@ -11,7 +11,8 @@ const pesos = new Intl.NumberFormat('es-CL', {
 export default function CardCatalogoServicio({ servicio }: CardCatalogoServicioProps) {
   return (
     <article className="card-servicio-col">
-      <div className="card h-100 shadow-sm">
+      <div className="card h-100 shadow-sm card-catalogo-con-imagen">
+        <img className="card-catalogo-imagen" src={servicio.imagen || '/img/Doctor.jpg'} alt={`Imagen de ${servicio.nombre}`} loading="lazy" />
         <div className="card-body">
           <span className="badge text-bg-success mb-2">{servicio.tipo}</span>
           <h2 className="h5 card-title">{servicio.nombre}</h2>

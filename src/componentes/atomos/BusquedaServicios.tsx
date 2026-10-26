@@ -7,6 +7,7 @@ export default function BusquedaServicios({ valor, alCambiar }: BusquedaServicio
   return (
     <div>
       <label className="form-label" htmlFor="buscar-servicio">Buscar servicio</label>
+
       <input
         id="buscar-servicio"
         className="form-control"
