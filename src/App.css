@@ -3,6 +3,13 @@
   width: 100%;
 }
 
+/* Mantiene la flecha de los selectores centrada y despejada del texto. */
+select.form-select {
+  background-position: right 0.85rem center;
+  background-repeat: no-repeat;
+  padding-right: 2.75rem;
+}
+
 @media (min-width: 768px) {
   .card-servicio-col {
     width: 25%;
@@ -35,6 +42,7 @@
 }
 
 .navbar .navbar-toggler {
+  display: inline-flex;
   margin-left: auto;
 }
 
@@ -56,7 +64,7 @@
 }
 
 /* Navbar en pantallas grandes */
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .navbar .container-fluid {
     flex-wrap: nowrap;
   }

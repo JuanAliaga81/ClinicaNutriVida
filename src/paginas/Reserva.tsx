@@ -1,5 +1,5 @@
-import GestorReservas from '../componentes/organismos/GestorReservas';
-import './Reserva.css';
+import GestorReservas from "../componentes/organismos/GestorReservas";
+import "./Reserva.css";
 
 export default function Reserva() {
   return (

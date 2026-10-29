@@ -20,7 +20,7 @@ function Navbar() {
   const cerrarMenu = () => setMenuAbierto(false);
 
   return (
-    <nav className="navbar sm:navbar-expand bg-1 fg-2 navbar-nutrivida">
+    <nav className="navbar bg-1 fg-2 navbar-nutrivida">
       <div className="container-fluid">
         <Link className="navbar-brand d-flex align-items-center" to="/inicio" onClick={cerrarMenu}>
           <img src="/img/Logo NutriVida.png" width={40} height={40} alt="" />

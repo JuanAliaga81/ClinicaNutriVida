@@ -3,10 +3,15 @@ type BusquedaServiciosProps = {
   alCambiar: (valor: string) => void;
 };
 
-export default function BusquedaServicios({ valor, alCambiar }: BusquedaServiciosProps) {
+export default function BusquedaServicios({
+  valor,
+  alCambiar,
+}: BusquedaServiciosProps) {
   return (
     <div>
-      <label className="form-label" htmlFor="buscar-servicio">Buscar servicio</label>
+      <label className="form-label" htmlFor="buscar-servicio">
+        Buscar servicio
+      </label>
 
       <input
         id="buscar-servicio"

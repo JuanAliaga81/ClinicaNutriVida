@@ -4,6 +4,7 @@ import Footer from './componentes/organismos/Footer'
 import Navbar from './componentes/organismos/Navbar'
 import Inicio from './paginas/Inicio'
 import Servicios from './paginas/Servicios'
+import DetalleServicio from './paginas/DetalleServicio'
 import Nosotros from './paginas/Nosotros'
 import Reserva from './paginas/Reserva'
 import Blogs from './paginas/Blogs'
@@ -23,6 +24,7 @@ function App() {
       <Route path="/" element={<Navigate to="/inicio" replace />} />
       <Route path="/inicio" element={<Inicio />} />
       <Route path="/servicios" element={<Servicios />} />
+      <Route path="/servicios/:codigo" element={<DetalleServicio />} />
       <Route path="/nosotros" element={<Nosotros />} />
       <Route path="/blogs" element={<Blogs />} />
       <Route path="/contacto" element={<Contacto />} />

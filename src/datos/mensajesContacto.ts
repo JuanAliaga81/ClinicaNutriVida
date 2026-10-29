@@ -15,6 +15,20 @@ export type MensajeConversacion = {
   fecha: string;
 };
 
+/** Crea una entrada al enviar un mensaje, fuera del renderizado de React. */
+export function crearEntradaConversacion(
+  autor: MensajeConversacion['autor'],
+  texto: string,
+): MensajeConversacion {
+  const ahora = new Date();
+  return {
+    id: `CHAT-${ahora.getTime()}`,
+    autor,
+    texto: texto.trim(),
+    fecha: ahora.toLocaleString('es-CL'),
+  };
+}
+
 const CLAVE = 'mensajesContactoNutriVida';
 
 export function listarMensajesContacto(): MensajeContacto[] {

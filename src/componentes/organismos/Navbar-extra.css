@@ -12,7 +12,7 @@
 .navbar-nutrivida .nav-link.login:hover, .navbar-nutrivida .nav-link.login:focus-visible { background: #16834e; color: #fff; }
 .navbar-nutrivida .nav-link.nav-admin { color: #28764f; font-weight: 650; }
 .navbar-nutrivida .nav-link.nav-admin:hover, .navbar-nutrivida .nav-link.nav-admin:focus-visible { color: #1e684b; text-decoration: underline; }
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .navbar-nutrivida .container-fluid { flex-wrap: nowrap; }
   .navbar-nutrivida .navbar-toggler { display: none; }
   .navbar-nutrivida .navbar-menu, .navbar-nutrivida .navbar-menu.is-open { display: flex; flex: 1; flex-basis: auto; align-items: center; padding-top: 0; }

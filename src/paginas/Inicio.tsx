@@ -9,7 +9,7 @@ function Inicio() {
 
       <h1>Nuestros Servicios</h1>
 
-      <Link to="/reserva">
+      <Link to="/agendar">
         <h2 className='reserva'>Reserva ahora</h2>
       </Link>
 

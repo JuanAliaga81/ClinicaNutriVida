@@ -11,6 +11,14 @@ export type Cita = {
 
 export type NuevaCita = Omit<Cita, 'id' | 'estado'>;
 
+/** Contrato del repositorio que aísla el CRUD de citas de los componentes. */
+export interface RepositorioCitas {
+  listar(): Cita[];
+  crear(datos: NuevaCita): Cita;
+  actualizar(id: string, cambios: NuevaCita): Cita | null;
+  eliminar(id: string): boolean;
+}
+
 const citasDemo: Cita[] = [
   {
     id: 'CIT-001',
@@ -34,7 +42,13 @@ const citasDemo: Cita[] = [
   },
 ];
 
-export function crearRepositorioCitas(iniciales: Cita[] = citasDemo) {
+/**
+ * Implementación en memoria del patrón Repository:
+ * los componentes usan este contrato sin manipular directamente el arreglo.
+ */
+export function crearRepositorioCitas(
+  iniciales: Cita[] = citasDemo,
+): RepositorioCitas {
   let citas = iniciales.map((cita) => ({ ...cita }));
   let siguienteNumero = citas.length + 1;
 

@@ -1,6 +1,9 @@
+import AreaTexto from "../atomos/AreaTexto";
+import Selector from "../atomos/Selector";
+import Input from "../atomos/Input";
 import type { ChangeEvent, FormEvent } from 'react';
 import type { NuevaCita } from '../../datos/citas';
-import CampoFormulario from '../atomos/CampoFormulario';
+import CampoFormulario from '../moleculas/CampoFormulario';
 
 type FormularioCitaProps = {
   valores: NuevaCita;
@@ -36,35 +39,35 @@ export default function FormularioCita({
       <div className="row g-3">
         <div className="col-12 col-md-6">
           <CampoFormulario id="paciente" etiqueta="Nombre del paciente" error={errores.paciente}>
-            <input id="paciente" className="form-control" value={valores.paciente} onChange={campo('paciente')} />
+            <Input id="paciente"  value={valores.paciente} onChange={campo('paciente')} />
           </CampoFormulario>
         </div>
         <div className="col-12 col-md-6">
           <CampoFormulario id="correo" etiqueta="Correo electrónico" error={errores.correo}>
-            <input id="correo" type="email" className="form-control" value={valores.correo} onChange={campo('correo')} />
+            <Input id="correo" type="email"  value={valores.correo} onChange={campo('correo')} />
           </CampoFormulario>
         </div>
         <div className="col-12 col-md-6">
           <CampoFormulario id="nutricionista" etiqueta="Nutricionista preferido" error={errores.nutricionista}>
-            <select id="nutricionista" className="form-select" value={valores.nutricionista} onChange={campo('nutricionista')}>
+            <Selector id="nutricionista"  value={valores.nutricionista} onChange={campo('nutricionista')}>
               <option value="">Selecciona un profesional</option>
               {nutricionistas.map((nombre) => <option key={nombre} value={nombre}>{nombre}</option>)}
-            </select>
+            </Selector>
           </CampoFormulario>
         </div>
         <div className="col-12 col-md-3">
           <CampoFormulario id="fecha" etiqueta="Fecha" error={errores.fecha}>
-            <input id="fecha" type="date" className="form-control" value={valores.fecha} onChange={campo('fecha')} />
+            <Input id="fecha" type="date"  value={valores.fecha} onChange={campo('fecha')} />
           </CampoFormulario>
         </div>
         <div className="col-12 col-md-3">
           <CampoFormulario id="hora" etiqueta="Hora preferida" error={errores.hora}>
-            <input id="hora" type="time" className="form-control" value={valores.hora} onChange={campo('hora')} />
+            <Input id="hora" type="time"  value={valores.hora} onChange={campo('hora')} />
           </CampoFormulario>
         </div>
         <div className="col-12">
           <CampoFormulario id="motivo" etiqueta="Motivo de la consulta" error={errores.motivo}>
-            <textarea id="motivo" className="form-control" rows={3} value={valores.motivo} onChange={campo('motivo')} />
+            <AreaTexto id="motivo"  rows={3} value={valores.motivo} onChange={campo('motivo')} />
           </CampoFormulario>
         </div>
       </div>

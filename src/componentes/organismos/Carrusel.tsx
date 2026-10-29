@@ -44,6 +44,7 @@ function Carrusel() {
         {slides.map((slide, index) => (
           <div
             key={index}
+            aria-hidden={index !== actual}
             style={{
               ...capa,
               opacity: index === actual ? 1 : 0,
@@ -67,10 +68,15 @@ function Carrusel() {
 
         <div style={puntos}>
           {slides.map((_, index) => (
-            <span
+            <button
+              type="button"
+              aria-label={`Ver diapositiva ${index + 1}`}
+              aria-pressed={index === actual}
               key={index}
               onClick={() => setActual(index)}
               style={{
+                border: 0,
+                padding: 0,
                 width: '12px',
                 height: '12px',
                 borderRadius: '50%',
@@ -94,7 +100,7 @@ const contenedor: CSSProperties = {
   position: 'relative',
   width: '100%',
   maxWidth: '1450px', // ancho máximo, ajústalo a gusto
-  height: '500px', // alto del carrusel
+  height: 'clamp(300px, 52vw, 500px)', // alto del carrusel
   margin: '0 auto', // lo centra
   overflow: 'hidden',
   borderRadius: '16px',
@@ -127,7 +133,8 @@ const caption: CSSProperties = {
   fontSize: '0.9rem',
   borderRadius: '8px',
   textAlign: 'center',
-  maxWidth: '85%',
+  width: '85%',
+  maxWidth: '640px',
 };
 
 const puntos: CSSProperties = {
@@ -144,17 +151,23 @@ const puntos: CSSProperties = {
 const flecha = (lado: 'left' | 'right'): CSSProperties => ({
   position: 'absolute',
   top: '50%',
-  [lado]: '12px',
+  [lado]: '16px',
   transform: 'translateY(-50%)',
   zIndex: 2,
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: 0,
+  boxSizing: 'border-box',
   background: 'rgba(0,0,0,0.4)',
   color: 'white',
   border: 'none',
   borderRadius: '50%',
-  width: '40px',
-  height: '40px',
-  fontSize: '26px',
-  lineHeight: '1',
+  width: '44px',
+  height: '44px',
+  fontSize: '30px',
+  lineHeight: 1,
+  textAlign: 'center',
   cursor: 'pointer',
 });
 
