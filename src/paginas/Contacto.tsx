@@ -1,7 +1,22 @@
 import FormularioContacto from "../componentes/organismos/FormularioContacto";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { obtenerUsuarioActual, type Usuario } from "../datos/auth";
 import "./PaginasExtra.css";
 
 export default function Contacto() {
+  const [usuario, setUsuario] = useState<Usuario | null>(obtenerUsuarioActual);
+
+  useEffect(() => {
+    const actualizarSesion = () => setUsuario(obtenerUsuarioActual());
+    window.addEventListener("nutrivida-auth", actualizarSesion);
+    window.addEventListener("storage", actualizarSesion);
+    return () => {
+      window.removeEventListener("nutrivida-auth", actualizarSesion);
+      window.removeEventListener("storage", actualizarSesion);
+    };
+  }, []);
+
   return (
     <main className="pagina-extra contacto-pagina container py-5">
       <section
@@ -53,7 +68,18 @@ export default function Contacto() {
             <p>Completa el formulario y cuéntanos cómo podemos ayudarte.</p>
           </header>
 
-          <FormularioContacto />
+          {usuario?.activo ? (
+            <FormularioContacto />
+          ) : (
+            <div className="alert alert-info contacto-acceso" role="status">
+              <h3 className="h5">Inicia sesión para escribirnos</h3>
+              <p>Tu mensaje quedará asociado a tu cuenta para que puedas revisar la conversación y sus respuestas.</p>
+              <div className="contacto-acceso-acciones">
+                <Link className="btn btn-success" to="/login">Iniciar sesión</Link>
+                <Link className="btn btn-outline-success" to="/registro">Crear cuenta</Link>
+              </div>
+            </div>
+          )}
         </div>
       </section>
     </main>

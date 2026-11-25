@@ -7,6 +7,10 @@ export type CitaLegada = {
   servicio: string;
   fecha: string;
   fechaRegistro: string;
+  paraQuien?: 'titular' | 'otra-persona';
+  fechaNacimiento?: string;
+  relacion?: string;
+  solicitanteCorreo?: string;
 };
 
 const CLAVE = 'citasNutriVida';

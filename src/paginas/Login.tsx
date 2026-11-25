@@ -43,9 +43,9 @@ export default function Login() {
               Volver al inicio
             </Link>
             <p className="login-demo">
-              Acceso de demostración: <strong>admin@nutrivida.cl</strong>
+              Acceso de demostración: <strong>admin@nutrivida.com</strong>
               <br />
-              Contraseña: <strong>NutriVida1</strong>
+              Contraseña: <strong>adminutrivida123</strong>
             </p>
           </div>
         </div>

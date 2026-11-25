@@ -65,16 +65,24 @@ export default function Confirmacion() {
                   <dd>{cita.nombre}</dd>
                 </div>
                 <div>
+                  <dt>Reserva para</dt>
+                  <dd>{cita.paraQuien === "otra-persona" ? "Otra persona" : "Titular del perfil"}</dd>
+                </div>
+                <div>
                   <dt>RUT</dt>
                   <dd>{cita.rut}</dd>
                 </div>
+                {cita.paraQuien === "otra-persona" && <>
+                  <div><dt>Fecha de nacimiento</dt><dd>{cita.fechaNacimiento}</dd></div>
+                  <div><dt>Relación con el titular</dt><dd>{cita.relacion}</dd></div>
+                </>}
                 <div>
                   <dt>Correo</dt>
-                  <dd>{cita.correo}</dd>
+                  <dd>{cita.correo || "No informado"}</dd>
                 </div>
                 <div>
                   <dt>Teléfono</dt>
-                  <dd>{cita.telefono}</dd>
+                  <dd>{cita.telefono || "No informado"}</dd>
                 </div>
               </dl>
 

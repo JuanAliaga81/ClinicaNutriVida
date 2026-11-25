@@ -1247,6 +1247,25 @@
 .contacto-formulario {
   padding: 2.3rem clamp(1.5rem, 4vw, 3rem);
 }
+.contacto-acceso {
+  display: block !important;
+  padding: 1.25rem;
+}
+.contacto-acceso h3 {
+  margin: 0 0 0.5rem;
+  color: #173d2d;
+}
+.contacto-acceso p {
+  margin: 0 0 1rem;
+}
+.contacto-acceso-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+.contacto-acceso-acciones .btn {
+  white-space: nowrap;
+}
 .contacto-cabecera {
   margin-bottom: 1.5rem;
 }

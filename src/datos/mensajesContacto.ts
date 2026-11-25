@@ -2,6 +2,8 @@ export type MensajeContacto = {
   id: string;
   nombre: string;
   correo: string;
+  tipoAsuntoId: string;
+  asunto: string;
   mensaje: string;
   fecha: string;
   leido: boolean;
@@ -38,6 +40,8 @@ export function listarMensajesContacto(): MensajeContacto[] {
       id: mensaje.id || `MSG-${Date.now()}`,
       nombre: mensaje.nombre || 'Usuario',
       correo: mensaje.correo || '',
+      tipoAsuntoId: mensaje.tipoAsuntoId || '',
+      asunto: mensaje.asunto || 'Consulta general',
       mensaje: mensaje.mensaje || '',
       fecha: mensaje.fecha || '',
       leido: mensaje.leido ?? false,

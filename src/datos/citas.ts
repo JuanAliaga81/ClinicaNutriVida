@@ -1,3 +1,5 @@
+import { cabecerasConToken } from "./auth";
+
 export type Cita = {
   id: string;
   paciente: string;
@@ -82,3 +84,41 @@ export function crearRepositorioCitas(
     },
   };
 }
+
+export type SolicitudCitaApi = {
+  idUsuario: number;
+  idPersona: number;
+  idServicio: number;
+  fecha: string;
+  prevision: string;
+};
+
+export type CitaApi = SolicitudCitaApi & { idCita: number };
+
+export async function listarCitasPorUsuarioApi(idUsuario: number): Promise<CitaApi[]> {
+  const respuesta = await fetch(`http://localhost:8080/api/citas/usuario/${idUsuario}`, { headers: cabecerasConToken() });
+  if (respuesta.status === 204) return [];
+  if (!respuesta.ok) throw new Error(`No se pudieron cargar las citas (HTTP ${respuesta.status}).`);
+  return (await respuesta.json()) as CitaApi[];
+}
+
+export async function eliminarCitaApi(idCita: number): Promise<void> {
+  const respuesta = await fetch(`http://localhost:8080/api/citas/${idCita}`, { method: "DELETE", headers: cabecerasConToken() });
+  if (!respuesta.ok) throw new Error(`No se pudo eliminar la cita (HTTP ${respuesta.status}).`);
+}
+
+export async function crearCitaApi(datos: SolicitudCitaApi): Promise<CitaApi> {
+  const respuesta = await fetch("http://localhost:8080/api/citas", {
+    method: "POST",
+    headers: cabecerasConToken({ "Content-Type": "application/json" }),
+    body: JSON.stringify(datos),
+  });
+
+  if (!respuesta.ok) {
+    const detalle = await respuesta.text();
+    throw new Error(detalle || `No se pudo guardar la cita (HTTP ${respuesta.status}).`);
+  }
+
+  return (await respuesta.json()) as CitaApi;
+}
+
