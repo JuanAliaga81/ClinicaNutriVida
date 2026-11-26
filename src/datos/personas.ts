@@ -64,19 +64,14 @@ export async function cargarCuentaReserva(correo: string): Promise<CuentaReserva
     celular: usuarioActual.celular || "",
   };
 
-  const respuestaVinculos = await fetch(`${API}/usuarios-personas`, {
+  const respuestaVinculos = await fetch(`${API}/usuarios-personas/usuario/${usuario.idUsuario}`, {
     headers: cabecerasConToken(),
   });
   const vinculos = respuestaVinculos.status === 204
     ? []
     : await respuestaJson<UsuarioPersonaApi[]>(respuestaVinculos);
 
-  return {
-    usuario,
-    personas: vinculos.filter(
-      (vinculo) => vinculo.usuario?.idUsuario === usuario.idUsuario,
-    ),
-  };
+  return { usuario, personas: vinculos };
 }
 
 export async function crearPersonaVinculada(
@@ -84,30 +79,16 @@ export async function crearPersonaVinculada(
   persona: Omit<PersonaApi, "idPersona">,
   relacion: string,
 ): Promise<UsuarioPersonaApi> {
-  const respuestaPersona = await fetch(`${API}/personas`, {
+  const respuestaVinculo = await fetch(`${API}/usuarios-personas/usuario/${usuario.idUsuario}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(persona),
+    headers: cabecerasConToken({ "Content-Type": "application/json" }),
+    body: JSON.stringify({
+      usuario: { idUsuario: usuario.idUsuario },
+      persona,
+      relacion,
+    }),
   });
-  const personaCreada = await respuestaJson<PersonaApi>(respuestaPersona);
-
-  try {
-    const respuestaVinculo = await fetch(`${API}/usuarios-personas`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        usuario: { idUsuario: usuario.idUsuario },
-        persona: { idPersona: personaCreada.idPersona },
-        relacion,
-      }),
-    });
-    return await respuestaJson<UsuarioPersonaApi>(respuestaVinculo);
-  } catch (error) {
-    await fetch(`${API}/personas/${personaCreada.idPersona}`, {
-      method: "DELETE",
-    }).catch(() => undefined);
-    throw error;
-  }
+  return await respuestaJson<UsuarioPersonaApi>(respuestaVinculo);
 }
 
 

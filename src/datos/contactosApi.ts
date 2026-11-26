@@ -48,7 +48,7 @@ export async function crearContactoApi(
   idTipoAsunto: number,
   mensaje: string,
 ): Promise<ContactoApi> {
-  const respuesta = await fetch(API_CONTACTOS, {
+  const respuesta = await fetch(`${API_CONTACTOS}/usuario/${idUsuario}`, {
     method: "POST",
     headers: cabecerasConToken({ "Content-Type": "application/json" }),
     body: JSON.stringify({ idUsuario, idTipoAsunto, mensaje }),

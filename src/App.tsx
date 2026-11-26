@@ -1,5 +1,8 @@
 import './App.css'
+import { useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
+import { obtenerToken } from './datos/auth';
+import { renovarTokenApi } from './datos/usuariosApi';
 import Footer from './componentes/organismos/Footer'
 import Navbar from './componentes/organismos/Navbar'
 import Inicio from './paginas/Inicio'
@@ -18,6 +21,10 @@ import Confirmacion from './paginas/Confirmacion'
 import Administracion from './paginas/Administracion'
 
 function App() {
+  useEffect(() => {
+    if (obtenerToken()) void renovarTokenApi().catch(() => undefined);
+  }, []);
+
   return <>
     <Navbar />
     <Routes>

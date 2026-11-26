@@ -95,7 +95,9 @@ export default function Citas() {
     setIdEliminando(id);
     setError("");
     try {
-      await eliminarCitaApi(id);
+      const idUsuario = obtenerUsuarioActual()?.idUsuario;
+      if (!idUsuario) throw new Error("Inicia sesión para eliminar una cita.");
+      await eliminarCitaApi(idUsuario, id);
       setCitas((actuales) => actuales.filter((cita) => cita.id !== id));
       setMensaje("La cita se eliminó de la base de datos.");
     } catch (errorEliminar) {
@@ -111,7 +113,9 @@ export default function Citas() {
     const eliminadas: number[] = [];
     for (const cita of citas) {
       try {
-        await eliminarCitaApi(cita.id);
+        const idUsuario = obtenerUsuarioActual()?.idUsuario;
+        if (!idUsuario) throw new Error("Inicia sesión para eliminar tus citas.");
+        await eliminarCitaApi(idUsuario, cita.id);
         eliminadas.push(cita.id);
       } catch {
         // Conserva en pantalla las citas que no alcanzaron a eliminarse.

@@ -3,7 +3,7 @@ import FormularioAdminBlog from "../componentes/organismos/FormularioAdminBlog";
 import ConversacionContacto from "../componentes/organismos/ConversacionContacto";
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { obtenerUsuarioActual, type Usuario } from '../datos/auth';
+import { obtenerToken, obtenerUsuarioActual, type Usuario } from '../datos/auth';
 import { listarUsuariosAdminApi } from '../datos/usuariosApi';
 import { type MensajeContacto } from '../datos/mensajesContacto';
 import { eliminarContactoApi, listarContactosAdminApi, responderContactoApi } from '../datos/contactosApi';
@@ -53,6 +53,10 @@ export default function Administracion() {
 
   useEffect(() => {
     const usuario = actual;
+    if (!obtenerToken()) {
+      navegar('/login', { replace: true });
+      return;
+    }
     if (!usuario?.activo || usuario.rol !== 'Administrador') {
       navegar(usuario ? '/perfil' : '/login', { replace: true });
       return;

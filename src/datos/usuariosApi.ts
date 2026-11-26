@@ -61,6 +61,16 @@ export async function iniciarSesionApi(correo: string, contrasena: string): Prom
   return resultado.usuario;
 }
 
+export async function renovarTokenApi(): Promise<UsuarioAutenticado> {
+  const respuesta = await fetch(`${API_USUARIOS}/renovar`, {
+    method: "POST",
+    headers: cabecerasConToken(),
+  });
+  const resultado = await leerRespuesta<{ token: string; usuario: UsuarioAutenticado }>(respuesta);
+  guardarToken(resultado.token);
+  return resultado.usuario;
+}
+
 export function convertirUsuarioLocal(usuario: UsuarioAutenticado): Usuario {
   const rol = usuario.rol?.toUpperCase();
   return {

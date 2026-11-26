@@ -102,13 +102,13 @@ export async function listarCitasPorUsuarioApi(idUsuario: number): Promise<CitaA
   return (await respuesta.json()) as CitaApi[];
 }
 
-export async function eliminarCitaApi(idCita: number): Promise<void> {
-  const respuesta = await fetch(`http://localhost:8080/api/citas/${idCita}`, { method: "DELETE", headers: cabecerasConToken() });
+export async function eliminarCitaApi(idUsuario: number, idCita: number): Promise<void> {
+  const respuesta = await fetch(`http://localhost:8080/api/citas/usuario/${idUsuario}/${idCita}`, { method: "DELETE", headers: cabecerasConToken() });
   if (!respuesta.ok) throw new Error(`No se pudo eliminar la cita (HTTP ${respuesta.status}).`);
 }
 
 export async function crearCitaApi(datos: SolicitudCitaApi): Promise<CitaApi> {
-  const respuesta = await fetch("http://localhost:8080/api/citas", {
+  const respuesta = await fetch(`http://localhost:8080/api/citas/usuario/${datos.idUsuario}`, {
     method: "POST",
     headers: cabecerasConToken({ "Content-Type": "application/json" }),
     body: JSON.stringify(datos),

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { obtenerUsuarioActual, type Usuario } from '../../datos/auth';
+import { obtenerToken, obtenerUsuarioActual, type Usuario } from '../../datos/auth';
 import './Navbar-extra.css';
 
 function Navbar() {
@@ -46,7 +46,7 @@ function Navbar() {
           </div>
           <div className="nav-acciones">
             <Link className="nav-link reserva" to="/agendar" onClick={cerrarMenu}>Reserva tu hora</Link>
-            {usuario?.rol === 'Administrador' && <Link className="nav-link nav-admin" to="/admin" onClick={cerrarMenu}>Administración</Link>}
+            {obtenerToken() && usuario?.rol === 'Administrador' && <Link className="nav-link nav-admin" to="/admin" onClick={cerrarMenu}>Administración</Link>}
             {usuario ? <Link className="nav-link login" to="/perfil" onClick={cerrarMenu}>Mi perfil</Link> : <Link className="nav-link login" to="/login" onClick={cerrarMenu}>Iniciar sesión</Link>}
           </div>
         </div>
